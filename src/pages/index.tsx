@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
-import { AuthOverlay, DeepSpaceAuthProvider, getAuthToken, signOut, useAuth } from 'deepspace'
+import { AuthOverlay, DeepSpaceAuthProvider, getAuthToken, useAuth } from 'deepspace'
 import { exercises, workoutSchema } from '../exercises'
 import type { Workout } from '../exercises'
 import { Seo } from '../components/Seo'
+import AccountMenu from '../components/AccountMenu'
 import { seo } from '../seo'
 
 export default function Landing() {
@@ -17,19 +18,6 @@ export default function Landing() {
 function LandingContent() {
   const { isLoaded, isSignedIn, userId } = useAuth()
   const [showAuth, setShowAuth] = useState(false)
-  const [signOutError, setSignOutError] = useState('')
-
-  async function handleSignOut() {
-    setSignOutError('')
-    setShowAuth(false)
-    try {
-      const result = await signOut()
-      if (result.error) throw new Error(result.error.message || 'Could not sign out.')
-    } catch (error) {
-      setSignOutError(error instanceof Error ? error.message : 'Could not sign out.')
-    }
-  }
-
   return (
     <>
       <Seo {...seo} path="/" />
@@ -38,9 +26,7 @@ function LandingContent() {
           <div className="brand">
             <span className="brand-mark">+</span> HEALTH CHAT
             {isLoaded && isSignedIn && (
-              <button className="btn sign-out-button" type="button" onClick={handleSignOut}>
-                Sign out
-              </button>
+              <AccountMenu onSignOut={() => setShowAuth(false)} />
             )}
           </div>
           <section className="hero text-center" data-testid="static-landing">
@@ -59,7 +45,6 @@ function LandingContent() {
             ) : (
               <WorkoutForm key={userId} />
             )}
-            {signOutError && <div className="alert alert-warning mx-auto mt-4 error-message" role="alert">{signOutError}</div>}
           </section>
           <footer>AI-generated fitness guidance, not medical advice. Stop if you feel pain.</footer>
         </div>

@@ -76,8 +76,12 @@ test.describe('Smoke tests', () => {
     await page.getByPlaceholder('Password').fill('test-password')
     await page.getByRole('button', { name: 'Sign in', exact: true }).click()
     await expect(page.getByLabel('Body part or exercise goal')).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Account menu' })).toContainText('Test User')
+    await expect(page.locator('nav a')).toHaveCount(0)
     await expect(page.getByTestId('auth-overlay')).toHaveCount(0)
-    await page.getByRole('button', { name: 'Sign out', exact: true }).click()
+    await page.getByRole('button', { name: 'Account menu' }).click()
+    await expect(page.getByTestId('nav-user-email')).toHaveText('test@example.test')
+    await page.getByRole('menuitem', { name: 'Sign out' }).click()
     await expect(page.getByRole('button', { name: 'Sign in with DeepSpace' })).toBeVisible()
     await expect(page.getByLabel('Body part or exercise goal')).toHaveCount(0)
     await expect(page.getByTestId('auth-overlay')).toHaveCount(0)
@@ -119,6 +123,7 @@ test.describe('Smoke tests', () => {
   test('dynamic app boundary mounts on /home', async ({ page }) => {
     await page.goto('/home')
     await expect(page.getByTestId('app-navigation')).toBeVisible({ timeout: 15000 })
+    await expect(page.locator('[data-testid="app-navigation"] a')).toHaveCount(0)
   })
 
   test('sign-in button visible when logged out', async ({ page }) => {
