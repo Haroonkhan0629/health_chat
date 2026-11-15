@@ -1,0 +1,512 @@
+{
+  "barbell-bench-press": {
+    "name": "Barbell Bench Press",
+    "group": "Chest",
+    "image": "/images/exercises/barbell-bench-press.jpg"
+  },
+  "barbell-incline-bench-press-medium-grip": {
+    "name": "Barbell Incline Bench Press",
+    "group": "Chest",
+    "image": "/images/exercises/barbell-incline-bench-press-medium-grip.jpg"
+  },
+  "cable-chest-press": {
+    "name": "Cable Chest Press",
+    "group": "Chest",
+    "image": "/images/exercises/cable-chest-press.jpg"
+  },
+  "cable-fly": {
+    "name": "Cable Fly",
+    "group": "Chest",
+    "image": "/images/exercises/cable-fly.jpg"
+  },
+  "close-grip-barbell-bench-press": {
+    "name": "Close-Grip Barbell Bench Press",
+    "group": "Chest",
+    "image": "/images/exercises/close-grip-barbell-bench-press.jpg"
+  },
+  "decline-push-up": {
+    "name": "Decline Push-Up",
+    "group": "Chest",
+    "image": "/images/exercises/decline-push-up.jpg"
+  },
+  "dumbell-bench-press": {
+    "name": "Dumbell Bench Press",
+    "group": "Chest",
+    "image": "/images/exercises/dumbell-bench-press.jpg"
+  },
+  "dumbell-fly": {
+    "name": "Dumbell Fly",
+    "group": "Chest",
+    "image": "/images/exercises/dumbell-fly.jpg"
+  },
+  "handle-bar-dip": {
+    "name": "Handle Bar Dip",
+    "group": "Chest",
+    "image": "/images/exercises/handle-bar-dip.jpg"
+  },
+  "incline-dumbbell-flyes": {
+    "name": "Incline Dumbbell Flyes",
+    "group": "Chest",
+    "image": "/images/exercises/incline-dumbbell-flyes.jpg"
+  },
+  "incline-dumbbell-press": {
+    "name": "Incline Dumbbell Press",
+    "group": "Chest",
+    "image": "/images/exercises/incline-dumbbell-press.jpg"
+  },
+  "incline-push-up": {
+    "name": "Incline Push-Up",
+    "group": "Chest",
+    "image": "/images/exercises/incline-push-up.jpg"
+  },
+  "machine-chest-press": {
+    "name": "Machine Chest Press",
+    "group": "Chest",
+    "image": "/images/exercises/machine-chest-press.jpg"
+  },
+  "machine-fly": {
+    "name": "Pec Deck Fly",
+    "group": "Chest",
+    "image": "/images/exercises/machine-fly.jpg"
+  },
+  "pushup": {
+    "name": "Pushup",
+    "group": "Chest",
+    "image": "/images/exercises/pushup.jpg"
+  },
+  "hyperextensions-back-extensions": {
+    "name": "Back Extension",
+    "group": "Back",
+    "image": "/images/exercises/hyperextensions-back-extensions.jpg"
+  },
+  "barbell-row": {
+    "name": "Barbell Row",
+    "group": "Back",
+    "image": "/images/exercises/barbell-row.jpg"
+  },
+  "cable-pulldown": {
+    "name": "Cable Pulldown",
+    "group": "Back",
+    "image": "/images/exercises/cable-pulldown.jpg"
+  },
+  "cable-row": {
+    "name": "Cable Row",
+    "group": "Back",
+    "image": "/images/exercises/cable-row.jpg"
+  },
+  "chin-up": {
+    "name": "Chin-Up",
+    "group": "Back",
+    "image": "/images/exercises/chin-up.jpg"
+  },
+  "close-grip-front-lat-pulldown": {
+    "name": "Close-Grip Front Lat Pulldown",
+    "group": "Back",
+    "image": "/images/exercises/close-grip-front-lat-pulldown.jpg"
+  },
+  "dumbell-row": {
+    "name": "Dumbell Row",
+    "group": "Back",
+    "image": "/images/exercises/dumbell-row.jpg"
+  },
+  "inverted-row": {
+    "name": "Inverted Row",
+    "group": "Back",
+    "image": "/images/exercises/inverted-row.jpg"
+  },
+  "machine-row": {
+    "name": "Leverage Iso Row",
+    "group": "Back",
+    "image": "/images/exercises/machine-row.jpg"
+  },
+  "pull-up-chin-up": {
+    "name": "Pull Up Chin Up",
+    "group": "Back",
+    "image": "/images/exercises/pull-up-chin-up.jpg"
+  },
+  "straight-arm-pulldown": {
+    "name": "Straight Arm Pulldown",
+    "group": "Back",
+    "image": "/images/exercises/straight-arm-pulldown.jpg"
+  },
+  "t-bar-row-with-handle": {
+    "name": "T-Bar Row",
+    "group": "Back",
+    "image": "/images/exercises/t-bar-row-with-handle.jpg"
+  },
+  "v-bar-pulldown": {
+    "name": "V-Bar Pulldown",
+    "group": "Back",
+    "image": "/images/exercises/v-bar-pulldown.jpg"
+  },
+  "arnold-dumbbell-press": {
+    "name": "Arnold Dumbbell Press",
+    "group": "Shoulders",
+    "image": "/images/exercises/arnold-dumbbell-press.jpg"
+  },
+  "barbell-overhead-press": {
+    "name": "Barbell Overhead Press",
+    "group": "Shoulders",
+    "image": "/images/exercises/barbell-overhead-press.jpg"
+  },
+  "cable-lateral-raise": {
+    "name": "Cable Lateral Raise",
+    "group": "Shoulders",
+    "image": "/images/exercises/cable-lateral-raise.jpg"
+  },
+  "cable-rear-delt-fly": {
+    "name": "Cable Rear Delt Fly",
+    "group": "Shoulders",
+    "image": "/images/exercises/cable-rear-delt-fly.jpg"
+  },
+  "dumbbell-shoulder-press": {
+    "name": "Dumbbell Shoulder Press",
+    "group": "Shoulders",
+    "image": "/images/exercises/dumbbell-shoulder-press.jpg"
+  },
+  "dumbell-lateral-raise": {
+    "name": "Dumbell Lateral Raise",
+    "group": "Shoulders",
+    "image": "/images/exercises/dumbell-lateral-raise.jpg"
+  },
+  "front-dumbbell-raise": {
+    "name": "Front Dumbbell Raise",
+    "group": "Shoulders",
+    "image": "/images/exercises/front-dumbbell-raise.jpg"
+  },
+  "reverse-flyes": {
+    "name": "Reverse Flyes",
+    "group": "Shoulders",
+    "image": "/images/exercises/reverse-flyes.jpg"
+  },
+  "rope-face-pull": {
+    "name": "Rope Face Pull",
+    "group": "Shoulders",
+    "image": "/images/exercises/rope-face-pull.jpg"
+  },
+  "machine-lateral-raise": {
+    "name": "Seated Dumbbell Lateral Raise",
+    "group": "Shoulders",
+    "image": "/images/exercises/machine-lateral-raise.jpg"
+  },
+  "standing-military-press": {
+    "name": "Standing Military Press",
+    "group": "Shoulders",
+    "image": "/images/exercises/standing-military-press.jpg"
+  },
+  "upright-barbell-row": {
+    "name": "Upright Barbell Row",
+    "group": "Shoulders",
+    "image": "/images/exercises/upright-barbell-row.jpg"
+  },
+  "barbell-shrug": {
+    "name": "Barbell Shrug",
+    "group": "Traps & Forearms",
+    "image": "/images/exercises/barbell-shrug.jpg"
+  },
+  "barbell-wrist-curl": {
+    "name": "Barbell Wrist Curl",
+    "group": "Traps & Forearms",
+    "image": "/images/exercises/barbell-wrist-curl.jpg"
+  },
+  "barbell-wrist-extension": {
+    "name": "Barbell Wrist Extension",
+    "group": "Traps & Forearms",
+    "image": "/images/exercises/barbell-wrist-extension.jpg"
+  },
+  "dumbell-shrug": {
+    "name": "Dumbell Shrug",
+    "group": "Traps & Forearms",
+    "image": "/images/exercises/dumbell-shrug.jpg"
+  },
+  "reverse-barbell-curl": {
+    "name": "Reverse Barbell Curl",
+    "group": "Traps & Forearms",
+    "image": "/images/exercises/reverse-barbell-curl.jpg"
+  },
+  "wrist-roller": {
+    "name": "Wrist Roller",
+    "group": "Traps & Forearms",
+    "image": "/images/exercises/wrist-roller.jpg"
+  },
+  "alternate-hammer-curl": {
+    "name": "Alternate Hammer Curl",
+    "group": "Biceps",
+    "image": "/images/exercises/alternate-hammer-curl.jpg"
+  },
+  "barbell-arm-curl": {
+    "name": "Barbell Arm Curl",
+    "group": "Biceps",
+    "image": "/images/exercises/barbell-arm-curl.jpg"
+  },
+  "cable-arm-curl": {
+    "name": "Cable Arm Curl",
+    "group": "Biceps",
+    "image": "/images/exercises/cable-arm-curl.jpg"
+  },
+  "concentration-curls": {
+    "name": "Concentration Curls",
+    "group": "Biceps",
+    "image": "/images/exercises/concentration-curls.jpg"
+  },
+  "dumbell-arm-curl": {
+    "name": "Dumbell Arm Curl",
+    "group": "Biceps",
+    "image": "/images/exercises/dumbell-arm-curl.jpg"
+  },
+  "ez-bar-curl": {
+    "name": "EZ-Bar Curl",
+    "group": "Biceps",
+    "image": "/images/exercises/ez-bar-curl.jpg"
+  },
+  "incline-dumbbell-curl": {
+    "name": "Incline Dumbbell Curl",
+    "group": "Biceps",
+    "image": "/images/exercises/incline-dumbbell-curl.jpg"
+  },
+  "machine-arm-curl": {
+    "name": "Machine Arm Curl",
+    "group": "Biceps",
+    "image": "/images/exercises/machine-arm-curl.jpg"
+  },
+  "preacher-curl": {
+    "name": "Preacher Curl",
+    "group": "Biceps",
+    "image": "/images/exercises/preacher-curl.jpg"
+  },
+  "standing-one-arm-cable-curl": {
+    "name": "Standing One-Arm Cable Curl",
+    "group": "Biceps",
+    "image": "/images/exercises/standing-one-arm-cable-curl.jpg"
+  },
+  "barbell-arm-extension": {
+    "name": "Barbell Arm Extension",
+    "group": "Triceps",
+    "image": "/images/exercises/barbell-arm-extension.jpg"
+  },
+  "bench-dips": {
+    "name": "Bench Dips",
+    "group": "Triceps",
+    "image": "/images/exercises/bench-dips.jpg"
+  },
+  "cable-arm-extension": {
+    "name": "Cable Arm Extension",
+    "group": "Triceps",
+    "image": "/images/exercises/cable-arm-extension.jpg"
+  },
+  "dumbell-arm-extension": {
+    "name": "Dumbell Arm Extension",
+    "group": "Triceps",
+    "image": "/images/exercises/dumbell-arm-extension.jpg"
+  },
+  "ez-bar-skullcrusher": {
+    "name": "EZ-Bar Skullcrusher",
+    "group": "Triceps",
+    "image": "/images/exercises/ez-bar-skullcrusher.jpg"
+  },
+  "machine-arm-extension": {
+    "name": "Machine Arm Extension",
+    "group": "Triceps",
+    "image": "/images/exercises/machine-arm-extension.jpg"
+  },
+  "standing-dumbbell-triceps-extension": {
+    "name": "Standing Dumbbell Triceps Extension",
+    "group": "Triceps",
+    "image": "/images/exercises/standing-dumbbell-triceps-extension.jpg"
+  },
+  "dips-triceps-version": {
+    "name": "Triceps Dips",
+    "group": "Triceps",
+    "image": "/images/exercises/dips-triceps-version.jpg"
+  },
+  "triceps-pushdown": {
+    "name": "Triceps Pushdown",
+    "group": "Triceps",
+    "image": "/images/exercises/triceps-pushdown.jpg"
+  },
+  "triceps-pushdown-rope-attachment": {
+    "name": "Triceps Pushdown (Rope)",
+    "group": "Triceps",
+    "image": "/images/exercises/triceps-pushdown-rope-attachment.jpg"
+  },
+  "ab-roller": {
+    "name": "Ab Roller",
+    "group": "Abs",
+    "image": "/images/exercises/ab-roller.jpg"
+  },
+  "air-bike": {
+    "name": "Air Bike",
+    "group": "Abs",
+    "image": "/images/exercises/air-bike.jpg"
+  },
+  "cable-crunch": {
+    "name": "Cable Crunch",
+    "group": "Abs",
+    "image": "/images/exercises/cable-crunch.jpg"
+  },
+  "crunches": {
+    "name": "Crunches",
+    "group": "Abs",
+    "image": "/images/exercises/crunches.jpg"
+  },
+  "hanging-leg-raise": {
+    "name": "Hanging Leg Raise",
+    "group": "Abs",
+    "image": "/images/exercises/hanging-leg-raise.jpg"
+  },
+  "leg-raise": {
+    "name": "Leg Raise",
+    "group": "Abs",
+    "image": "/images/exercises/leg-raise.jpg"
+  },
+  "machine-crunch": {
+    "name": "Machine Crunch",
+    "group": "Abs",
+    "image": "/images/exercises/machine-crunch.jpg"
+  },
+  "plank": {
+    "name": "Plank",
+    "group": "Abs",
+    "image": "/images/exercises/plank.jpg"
+  },
+  "reverse-crunch": {
+    "name": "Reverse Crunch",
+    "group": "Abs",
+    "image": "/images/exercises/reverse-crunch.jpg"
+  },
+  "russian-twist": {
+    "name": "Russian Twist",
+    "group": "Abs",
+    "image": "/images/exercises/russian-twist.jpg"
+  },
+  "barbell-sissy-squat": {
+    "name": "Barbell Sissy Squat",
+    "group": "Legs",
+    "image": "/images/exercises/barbell-sissy-squat.jpg"
+  },
+  "barbell-squat": {
+    "name": "Barbell Squat",
+    "group": "Legs",
+    "image": "/images/exercises/barbell-squat.jpg"
+  },
+  "barbell-walking-lunge": {
+    "name": "Barbell Walking Lunge",
+    "group": "Legs",
+    "image": "/images/exercises/barbell-walking-lunge.jpg"
+  },
+  "deadlift": {
+    "name": "Deadlift",
+    "group": "Legs",
+    "image": "/images/exercises/deadlift.jpg"
+  },
+  "dumbbell-lunges": {
+    "name": "Dumbbell Lunges",
+    "group": "Legs",
+    "image": "/images/exercises/dumbbell-lunges.jpg"
+  },
+  "dumbell-calf-raise": {
+    "name": "Dumbell Calf Raise",
+    "group": "Legs",
+    "image": "/images/exercises/dumbell-calf-raise.jpg"
+  },
+  "dumbell-split-squat": {
+    "name": "Dumbell Split Squat",
+    "group": "Legs",
+    "image": "/images/exercises/dumbell-split-squat.jpg"
+  },
+  "front-barbell-squat": {
+    "name": "Front Barbell Squat",
+    "group": "Legs",
+    "image": "/images/exercises/front-barbell-squat.jpg"
+  },
+  "nordic-leg-curl": {
+    "name": "Glute-Ham Raise",
+    "group": "Legs",
+    "image": "/images/exercises/nordic-leg-curl.jpg"
+  },
+  "goblet-squat": {
+    "name": "Goblet Squat",
+    "group": "Legs",
+    "image": "/images/exercises/goblet-squat.jpg"
+  },
+  "vertical-calf-raise": {
+    "name": "Leg Press Calf Raise",
+    "group": "Legs",
+    "image": "/images/exercises/vertical-calf-raise.jpg"
+  },
+  "lunge": {
+    "name": "Lunge",
+    "group": "Legs",
+    "image": "/images/exercises/lunge.jpg"
+  },
+  "lying-leg-curls": {
+    "name": "Lying Leg Curls",
+    "group": "Legs",
+    "image": "/images/exercises/lying-leg-curls.jpg"
+  },
+  "machine-calf-raise": {
+    "name": "Machine Calf Raise",
+    "group": "Legs",
+    "image": "/images/exercises/machine-calf-raise.jpg"
+  },
+  "machine-hack-squat": {
+    "name": "Machine Hack Squat",
+    "group": "Legs",
+    "image": "/images/exercises/machine-hack-squat.jpg"
+  },
+  "machine-leg-curl": {
+    "name": "Machine Leg Curl",
+    "group": "Legs",
+    "image": "/images/exercises/machine-leg-curl.jpg"
+  },
+  "machine-leg-extension": {
+    "name": "Machine Leg Extension",
+    "group": "Legs",
+    "image": "/images/exercises/machine-leg-extension.jpg"
+  },
+  "machine-leg-press": {
+    "name": "Machine Leg Press",
+    "group": "Legs",
+    "image": "/images/exercises/machine-leg-press.jpg"
+  },
+  "romanian-deadlift": {
+    "name": "Romanian Deadlift",
+    "group": "Legs",
+    "image": "/images/exercises/romanian-deadlift.jpg"
+  },
+  "standing-calf-raises": {
+    "name": "Standing Calf Raises",
+    "group": "Legs",
+    "image": "/images/exercises/standing-calf-raises.jpg"
+  },
+  "sumo-deadlift": {
+    "name": "Sumo Deadlift",
+    "group": "Legs",
+    "image": "/images/exercises/sumo-deadlift.jpg"
+  },
+  "barbell-glute-bridge": {
+    "name": "Barbell Glute Bridge",
+    "group": "Glutes",
+    "image": "/images/exercises/barbell-glute-bridge.jpg"
+  },
+  "barbell-hip-thrust": {
+    "name": "Barbell Hip Thrust",
+    "group": "Glutes",
+    "image": "/images/exercises/barbell-hip-thrust.jpg"
+  },
+  "butt-lift-bridge": {
+    "name": "Butt Lift Bridge",
+    "group": "Glutes",
+    "image": "/images/exercises/butt-lift-bridge.jpg"
+  },
+  "glute-kickback": {
+    "name": "Glute Kickback",
+    "group": "Glutes",
+    "image": "/images/exercises/glute-kickback.jpg"
+  },
+  "single-leg-glute-bridge": {
+    "name": "Single Leg Glute Bridge",
+    "group": "Glutes",
+    "image": "/images/exercises/single-leg-glute-bridge.jpg"
+  }
+}
