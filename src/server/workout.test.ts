@@ -129,6 +129,51 @@ describe('workout API', () => {
     expect(await response.json()).toEqual({ error: 'The workout service is busy. Please wait a moment and try again.' })
   })
 
+  it('retries Groq structured-output failures and returns the valid result', async () => {
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+      .map((day) => ({ day, title: 'Rest', note: 'Recover.', exercises: [] }))
+    const fetchMock = vi.fn()
+      .mockResolvedValueOnce(Response.json({ error: { code: 'json_validate_failed' } }, { status: 400 }))
+      .mockResolvedValueOnce(groqReply({ valid: true, days }))
+    vi.stubGlobal('fetch', fetchMock)
+    const response = await request(JSON.stringify({ input: 'back' }))
+    expect(response.status).toBe(200)
+    expect(await response.json()).toEqual({ valid: true, days })
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+  })
+
+  it('limits structured-output retries and does not retry other errors', async () => {
+    const fetchMock = vi.fn()
+      .mockImplementationOnce(() => Response.json({ error: { code: 'json_validate_failed' } }, { status: 400 }))
+      .mockImplementationOnce(() => Response.json({ error: { code: 'json_validate_failed' } }, { status: 400 }))
+      .mockImplementationOnce(() => Response.json({ error: { code: 'json_validate_failed' } }, { status: 400 }))
+      .mockImplementationOnce(() => Response.json({ error: { code: 'other' } }, { status: 400 }))
+    vi.stubGlobal('fetch', fetchMock)
+    expect((await request(JSON.stringify({ input: 'back' }))).status).toBe(502)
+    expect(fetchMock).toHaveBeenCalledTimes(3)
+    expect((await request(JSON.stringify({ input: 'back' }))).status).toBe(502)
+    expect(fetchMock).toHaveBeenCalledTimes(4)
+  })
+
+  it('honors a short rate limit after a structured-output retry', async () => {
+    const fetchMock = vi.fn()
+      .mockResolvedValueOnce(Response.json({ error: { code: 'json_validate_failed' } }, { status: 400 }))
+      .mockResolvedValueOnce(new Response('', { status: 429, headers: { 'Retry-After': '0' } }))
+      .mockResolvedValueOnce(groqReply({ valid: false, days: [] }))
+    vi.stubGlobal('fetch', fetchMock)
+    expect((await request(JSON.stringify({ input: 'back' }))).status).toBe(422)
+    expect(fetchMock).toHaveBeenCalledTimes(3)
+  })
+
+  it('does not wait on a long rate limit', async () => {
+    const fetchMock = vi.fn()
+      .mockResolvedValueOnce(Response.json({ error: { code: 'json_validate_failed' } }, { status: 400 }))
+      .mockResolvedValueOnce(new Response('', { status: 429, headers: { 'Retry-After': '60' } }))
+    vi.stubGlobal('fetch', fetchMock)
+    expect((await request(JSON.stringify({ input: 'back' }))).status).toBe(429)
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+  })
+
   it('rejects a schedule with more than five exercises on a day', async () => {
     const exercise = { id: 'barbell-bench-press', sets: '3', reps: '8-12' }
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']

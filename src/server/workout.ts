@@ -89,7 +89,7 @@ export function registerWorkoutRoute(
     }
 
     try {
-      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      const options: RequestInit = {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${c.env.GROQ_API_KEY}`,
@@ -110,8 +110,37 @@ export function registerWorkoutRoute(
             { role: 'user', content: request.data.input },
           ],
         }),
-        signal: AbortSignal.timeout(30000),
-      })
+        signal: AbortSignal.timeout(45000),
+      }
+      let response = await fetch('https://api.groq.com/openai/v1/chat/completions', options)
+      let outputRetries = 0
+      let rateLimitRetried = false
+      while (true) {
+        if (response.status === 429 && outputRetries > 0 && !rateLimitRetried) {
+          const retryAfter = response.headers.get('retry-after')
+          const seconds = retryAfter === null ? NaN : Number(retryAfter)
+          if (Number.isFinite(seconds) && seconds >= 0 && seconds <= 15) {
+            rateLimitRetried = true
+            console.warn('Groq rate limited a retry; waiting before trying again.')
+            await new Promise((resolve) => setTimeout(resolve, seconds * 1000))
+            response = await fetch('https://api.groq.com/openai/v1/chat/completions', options)
+            continue
+          }
+        }
+        if (response.status !== 400 || outputRetries >= 2) break
+        let errorBody: unknown
+        try {
+          errorBody = await response.json()
+        } catch (error) {
+          console.error('Could not read Groq error response:', error)
+          break
+        }
+        const errorCode = z.object({ error: z.object({ code: z.string() }) }).safeParse(errorBody)
+        if (!errorCode.success || errorCode.data.error.code !== 'json_validate_failed') break
+        outputRetries++
+        console.warn('Groq could not produce valid structured output; retrying.')
+        response = await fetch('https://api.groq.com/openai/v1/chat/completions', options)
+      }
       if (response.status === 429) {
         console.error('Groq rate limit reached')
         return c.json({ error: 'The workout service is busy. Please wait a moment and try again.' }, 429)
