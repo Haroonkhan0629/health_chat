@@ -10,9 +10,35 @@ const resultSchema = z.discriminatedUnion('valid', [
   workoutSchema,
 ])
 
-const exerciseChoices = Object.entries(exercises).map(([id, exercise]) => ({
-  id, name: exercise.name, group: exercise.group,
-}))
+const exerciseAliases = { 'lat-pulldown': 'cable-pulldown' } as const
+const exerciseChoices = [
+  ...Object.entries(exercises).map(([id, exercise]) => ({
+    id, name: exercise.name, group: exercise.group,
+  })),
+  { id: 'lat-pulldown', name: 'Lat Pulldown', group: 'Back' },
+]
+
+const modelResultSchema = z.object({
+  valid: z.literal(true),
+  days: z.array(z.object({
+    exercises: z.array(z.object({ id: z.string() }).passthrough()),
+  }).passthrough()),
+}).passthrough()
+
+function normalizeExerciseIds(value: unknown): unknown {
+  const parsed = modelResultSchema.safeParse(value)
+  if (!parsed.success) return value
+  return {
+    ...parsed.data,
+    days: parsed.data.days.map((day) => ({
+      ...day,
+      exercises: day.exercises.map((exercise) => ({
+        ...exercise,
+        id: exercise.id === 'lat-pulldown' ? exerciseAliases['lat-pulldown'] : exercise.id,
+      })),
+    })),
+  }
+}
 
 const responseSchema = {
   type: 'object',
@@ -39,7 +65,7 @@ const responseSchema = {
               additionalProperties: false,
               required: ['id', 'sets', 'reps'],
               properties: {
-                id: { type: 'string', enum: Object.keys(exercises) },
+                id: { type: 'string', enum: [...Object.keys(exercises), ...Object.keys(exerciseAliases)] },
                 sets: { type: 'string' },
                 reps: { type: 'string' },
               },
@@ -153,7 +179,7 @@ export function registerWorkoutRoute(
       const payload = await response.json() as { choices?: { message?: { content?: string } }[] }
       const content = payload.choices?.[0]?.message?.content
       if (!content) throw new Error('Groq returned no content')
-      const result = resultSchema.safeParse(JSON.parse(content))
+      const result = resultSchema.safeParse(normalizeExerciseIds(JSON.parse(content)))
       if (!result.success) {
         console.error('Groq returned an invalid workout structure:', result.error.issues.map(({ code, path }) => ({ code, path })))
         return c.json({ error: 'Could not generate a workout. Please try again.' }, 502)

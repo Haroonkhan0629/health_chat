@@ -89,7 +89,7 @@ describe('workout API', () => {
     const schema = sent.response_format.json_schema.schema
     expect(schema.required).toEqual(['valid', 'days'])
     expect(schema.properties.days.items.properties.exercises.maxItems).toBe(5)
-    expect(schema.properties.days.items.properties.exercises.items.properties.id.enum).toEqual(Object.keys(exercises))
+    expect(schema.properties.days.items.properties.exercises.items.properties.id.enum).toEqual([...Object.keys(exercises), 'lat-pulldown'])
     expect(sent.messages[0].role).toBe('system')
     expect(sent.messages[0].content).toContain('how do i look bigger')
     expect(sent.messages[0].content).toContain('never include more than five exercises per day')
@@ -111,6 +111,19 @@ describe('workout API', () => {
     const response = await request(JSON.stringify({ input: 'chest' }))
     expect(response.status).toBe(200)
     expect(await response.json()).toEqual({ valid: true, days })
+  })
+
+  it('maps the lat pulldown alias to its catalog image', async () => {
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+      .map((day, i) => ({
+        day, title: 'Workout', note: 'Take your time.',
+        exercises: i === 0 ? [{ id: 'lat-pulldown', sets: '3', reps: '8-12' }] : [],
+      }))
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(groqReply({ valid: true, days })))
+    const response = await request(JSON.stringify({ input: 'back' }))
+    expect(response.status).toBe(200)
+    const result = await response.json() as { days: { exercises: { id: string }[] }[] }
+    expect(result.days[0].exercises[0].id).toBe('cable-pulldown')
   })
 
   it('rejects malformed model output and upstream failures', async () => {

@@ -9,7 +9,7 @@ Health Chat creates a weekly workout plan based on a body part, muscle group, or
 1. A user signs in with DeepSpace. The React page shows the workout search once the session is signed in.
 2. The browser sends the goal as JSON to `POST /api/workout`, along with a short-lived DeepSpace JWT.
 3. The DeepSpace Worker routes the request to the workout handler, which verifies the JWT before calling Groq.
-4. The backend sends the goal, system instructions, exercise catalog, and a structured response schema to Groq's `openai/gpt-oss-120b` model. The schema limits exercise IDs to those in the catalog.
+4. The backend sends the goal, system instructions, exercise catalog, and a structured response schema to Groq's `openai/gpt-oss-120b` model. The schema limits exercise IDs to the catalog and a known alias, which is mapped to its catalog ID.
 5. The backend retries a limited number of times if Groq rejects its generated JSON. The app validates the response, matches each ID to a local image, and displays the plan.
 
 ## Tools used
