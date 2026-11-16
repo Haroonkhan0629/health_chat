@@ -1,6 +1,7 @@
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest'
 import { Hono } from 'hono'
 import type { AppContext, Env } from '../../worker'
+import { exercises } from '../exercises'
 import { registerWorkoutRoute } from './workout'
 import { resolveAuth } from './http-routes'
 
@@ -76,13 +77,19 @@ describe('workout API', () => {
   })
 
   it('sends the system instructions and returns an invalid-input error', async () => {
-    const fetchMock = vi.fn().mockResolvedValue(groqReply({ valid: false }))
+    const fetchMock = vi.fn().mockResolvedValue(groqReply({ valid: false, days: [] }))
     vi.stubGlobal('fetch', fetchMock)
     const response = await request(JSON.stringify({ input: 'how do i look bigger' }))
     expect(response.status).toBe(422)
     expect(await response.json()).toEqual({ error: expect.stringMatching(/invalid input/i) })
     const sent = JSON.parse(fetchMock.mock.calls[0][1].body)
     expect(sent.model).toBe('openai/gpt-oss-120b')
+    expect(sent.response_format.type).toBe('json_schema')
+    expect(sent.response_format.json_schema.strict).toBe(true)
+    const schema = sent.response_format.json_schema.schema
+    expect(schema.required).toEqual(['valid', 'days'])
+    expect(schema.properties.days.items.properties.exercises.maxItems).toBe(5)
+    expect(schema.properties.days.items.properties.exercises.items.properties.id.enum).toEqual(Object.keys(exercises))
     expect(sent.messages[0].role).toBe('system')
     expect(sent.messages[0].content).toContain('how do i look bigger')
     expect(sent.messages[0].content).toContain('never include more than five exercises per day')
@@ -109,10 +116,17 @@ describe('workout API', () => {
   it('rejects malformed model output and upstream failures', async () => {
     const fetchMock = vi.fn()
       .mockResolvedValueOnce(groqReply({ valid: true, days: [] }))
-      .mockResolvedValueOnce(new Response('', { status: 429 }))
+      .mockResolvedValueOnce(new Response('', { status: 500 }))
     vi.stubGlobal('fetch', fetchMock)
     expect((await request(JSON.stringify({ input: 'chest' }))).status).toBe(502)
     expect((await request(JSON.stringify({ input: 'chest' }))).status).toBe(502)
+  })
+
+  it('reports the Groq rate limit to the user', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response('', { status: 429 })))
+    const response = await request(JSON.stringify({ input: 'chest' }))
+    expect(response.status).toBe(429)
+    expect(await response.json()).toEqual({ error: 'The workout service is busy. Please wait a moment and try again.' })
   })
 
   it('rejects a schedule with more than five exercises on a day', async () => {
@@ -126,5 +140,15 @@ describe('workout API', () => {
     const response = await request(JSON.stringify({ input: 'chest' }))
     expect(response.status).toBe(502)
     expect(await response.json()).toEqual({ error: 'Could not generate a workout. Please try again.' })
+  })
+
+  it('rejects exercises not present in the image catalog', async () => {
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+      .map((day, i) => ({
+        day, title: 'Workout', note: 'Take your time.',
+        exercises: i === 0 ? [{ id: 'made-up-exercise', sets: '3', reps: '8-12' }] : [],
+      }))
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(groqReply({ valid: true, days })))
+    expect((await request(JSON.stringify({ input: 'chest' }))).status).toBe(502)
   })
 })
